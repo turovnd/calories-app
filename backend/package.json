@@ -1,0 +1,80 @@
+{
+  "name": "calories-app-backedn",
+  "version": "1.0.0",
+  "description": "Backend service calories app",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prod": "NODE_ENV=production && node lib/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "NODE_ENV=production babel src --out-dir lib --source-maps inline",
+    "eslint": "eslint src/**/*.js tests/**/*.js",
+    "eslintfix": "eslint src/**/*.js tests/**/*.js --fix",
+    "test": "jest --coverage=false",
+    "coverage": "jest --coverage=true --no-cache",
+    "prepush": "npm run eslint && npm run test",
+    "fix": "npm run eslintfix"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cookie": "^0.4.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.4",
+    "mongoose-findorcreate": "^3.0.0",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "expect": "^25.3.0",
+    "express-swagger-generator": "^1.1.17",
+    "jest": "^25.3.0",
+    "jest-cli": "^25.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "tests/**/*.{js,jsx}"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@bimdata)/)"
+    ]
+  },
+  "babel": {
+    "plugins": [],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  }
+}

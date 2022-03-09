@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: calories
+    volumes:
+      - ./database/mongo:/data/db
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - 3100:3100
+    environment:
+      SERVER_PORT: 3100
+      MONGO_URL: mongodb://admin:admin@mongo:27017/calories?authSource=admin
+      TOKEN_HASH: clfdau12dLASd901
+      PASSWORD_HASH: czlkfhdoqw2139saldk
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - 3200:80
